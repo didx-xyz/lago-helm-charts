@@ -110,5 +110,9 @@ spec:
           livenessProbe:
             exec:
               command: ["/bin/bash", "-l", "-c", "bundle exec sidekiqmon processes | grep $(hostname) || exit 1"]
+            periodSeconds: 10
+            failureThreshold: 5
+            timeoutSeconds: 5
+            initialDelaySeconds: 60
       restartPolicy: Always
       serviceAccountName: {{ .Values.global.serviceAccountName | default (printf "%s-serviceaccount" .Release.Name) }}
