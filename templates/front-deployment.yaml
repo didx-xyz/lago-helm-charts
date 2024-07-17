@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
+  labels: {{- include "standardLabels"  . | nindent 4 }}
+    app.kubernetes.io/component:  {{ .Release.Name }}-front
     io.lago.service: {{ .Release.Name }}-front
   name: {{ .Release.Name }}-front
 spec:
@@ -11,7 +12,8 @@ spec:
       io.lago.service: {{ .Release.Name }}-front
   template:
     metadata:
-      labels:
+      labels: {{- include "standardLabels"  . | nindent 8 }}
+        app.kubernetes.io/component:  {{ .Release.Name }}-front
         io.lago.service: {{ .Release.Name }}-front
         {{- range $key, $value := .Values.front.podLabels }}
         {{ $key }}: {{ $value | quote }}

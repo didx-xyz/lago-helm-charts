@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
+  labels: {{- include "standardLabels"  . | nindent 4 }}
+    app.kubernetes.io/component:  {{ .Release.Name }}-api
     io.lago.service: {{ .Release.Name }}-clock
   name: {{ .Release.Name }}-clock
 spec:
@@ -13,7 +14,8 @@ spec:
     type: Recreate
   template:
     metadata:
-      labels:
+      labels: {{- include "standardLabels"  . | nindent 8 }}
+        app.kubernetes.io/component:  {{ .Release.Name }}-api
         io.lago.service: {{ .Release.Name }}-clock
         {{- range $key, $value := .Values.clock.podLabels }}
         {{ $key }}: {{ $value | quote }}

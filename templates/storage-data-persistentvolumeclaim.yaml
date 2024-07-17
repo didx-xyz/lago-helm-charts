@@ -2,7 +2,8 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  labels:
+  labels: {{- include "standardLabels"  . | nindent 4 }}
+    app.kubernetes.io/component:  {{ .Release.Name }}-storage-data
     io.lago.service: {{ .Release.Name }}-storage-data
   name: {{ .Release.Name }}-storage-data
 spec:

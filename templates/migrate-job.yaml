@@ -2,8 +2,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: "{{ include "migrateJobName" . }}"
-  labels:
-    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  labels: {{- include "standardLabels"  . | nindent 4 }}
+    app.kubernetes.io/component:  {{ .Release.Name }}-{{ include "migrateJobName" . }}
 spec:
   template:
     metadata:

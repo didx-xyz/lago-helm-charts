@@ -2,6 +2,8 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
+  labels: {{- include "standardLabels"  . | nindent 4 }}
+    app.kubernetes.io/component:  {{ .Release.Name }}-network-policy
   annotations:
   name: {{ .Release.Name }}
 spec:

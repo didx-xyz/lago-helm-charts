@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
+  labels: {{- include "standardLabels" . | nindent 4 }}
+    app.kubernetes.io/component:  {{ .Release.Name }}-api
     io.lago.service: {{ .Release.Name }}-api
   name: {{ .Release.Name }}-api
 spec:
@@ -13,7 +14,8 @@ spec:
     type: Recreate
   template:
     metadata:
-      labels:
+      labels: {{- include "standardLabels"  . | nindent 8 }}
+        app.kubernetes.io/component:  {{ .Release.Name }}-api
         io.lago.service: {{ .Release.Name }}-api
         {{- range $key, $value := .Values.api.podLabels }}
         {{ $key }}: {{ $value | quote }}

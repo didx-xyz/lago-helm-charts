@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
+  labels: {{- include "standardLabels"  . | nindent 4 }}
+    app.kubernetes.io/component:  {{ .Release.Name }}-events-worker
     io.lago.service: {{ .Release.Name }}-events-worker
   name: {{ .Release.Name }}-events-worker
 spec:
@@ -13,7 +14,8 @@ spec:
     type: Recreate
   template:
     metadata:
-      labels:
+      labels: {{- include "standardLabels"  . | nindent 8 }}
+        app.kubernetes.io/component:  {{ .Release.Name }}-events-worker
         io.lago.service: {{ .Release.Name }}-events-worker
         {{- range $key, $value := .Values.eventsWorker.podLabels }}
         {{ $key }}: {{ $value | quote }}
