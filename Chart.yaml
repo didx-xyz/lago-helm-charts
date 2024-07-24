@@ -5,11 +5,11 @@ name: lago
 version: 1.11.0
 dependencies:
   - name: postgresql
-    version: '13.2.2'
+    version: "15.5.18"
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
   - name: redis
-    version: '18.2.1'
+    version: "19.6.2"
     repository: https://charts.bitnami.com/bitnami
     condition: redis.enabled
   - name: minio
