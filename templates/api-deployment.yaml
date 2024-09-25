@@ -179,6 +179,18 @@ spec:
                   name: {{ .Release.Name }}-secrets
                   key: newRelicKey
             {{ end }}
+            {{ if .Values.global.auth.google.enabled }}
+            - name: GOOGLE_AUTH_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "secret-path" . }}
+                  key: googleAuthClientId
+            - name: GOOGLE_AUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "secret-path" . }}
+                  key: googleAuthClientSecret
+            {{ end }}
           image: getlago/api:v{{ .Values.version }}
           name: {{ .Release.Name }}-api
           ports:

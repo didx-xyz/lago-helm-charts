@@ -37,6 +37,8 @@ global:
   #  - awsS3SecretAccessKey:
   #  - smtpUsername:
   #  - smtpPassword:
+  #  - googleAuthClientId:
+  #  - googleAuthClientSecret:
   #existingSecret: "lago-credentials"
 
   # Not required if using existingSecret
@@ -92,6 +94,16 @@ global:
 
   # If kubectlVersion is not supplied it will be inferred using the version of the cluster that Lago is deployed on.
   #kubectlVersion: 1.29
+  
+  # You can enable google auth.
+  # If enabled cleintId and clientSecret are not required here if using existingSecret. 
+  # NB: Snsure that yoou set the Allowed redirect URIs in your Google Cloud console where you define your OAuth credentials for Lago,
+  # which is the Lago front URL(with port if different than 80 or 443) followed by "/auth/google/callback". Ex: http(s)://yourdomain.com/auth/google/callback
+  auth:
+    google:
+      enabled: false
+      # cleintId:
+      # clientSecret:
 
 front:
   replicas: 1
