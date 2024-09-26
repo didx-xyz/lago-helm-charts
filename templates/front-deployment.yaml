@@ -27,8 +27,10 @@ spec:
               value: {{ .Values.apiUrl | quote }}
             - name: APP_ENV
               value: production
+            - name: APP_DOMAIN
+              value: {{ .Values.frontUrl | quote }}
             - name: CODEGEN_API
-              value: {{ .Values.apiUrl | quote }}
+              value: {{ .Values.apiUrl }}/graphql
             - name: LAGO_DISABLE_SIGNUP
               value: {{ not .Values.global.signup.enabled | quote }}
           image: getlago/front:v{{ .Values.version }}
