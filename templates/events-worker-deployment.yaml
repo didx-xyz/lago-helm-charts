@@ -107,8 +107,14 @@ spec:
           resources:
             {{- toYaml . | nindent 12}}
           {{- end }}
+          {{- if .Values.eventsWorker.livenessProbe.enabled | default true }}
           livenessProbe:
             exec:
               command: ["/bin/bash", "-l", "-c", "bundle exec sidekiqmon processes | grep $(hostname) || exit 1"]
+            periodSeconds: {{ .Values.eventsWorker.livenessProbe.periodSeconds | default 10 }}
+            failureThreshold: {{ .Values.eventsWorker.livenessProbe.failureThreshold | default 5 }}
+            timeoutSeconds: {{ .Values.eventsWorker.livenessProbe.timeoutSeconds | default 5 }}
+            initialDelaySeconds: {{ .Values.eventsWorker.livenessProbe.initialDelaySeconds | default 60 }}
+          {{- end }}
       restartPolicy: Always
       serviceAccountName: {{ .Values.global.serviceAccountName | default (printf "%s-serviceaccount" .Release.Name) }}

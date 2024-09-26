@@ -163,9 +163,15 @@ spec:
             {{ end }}
           image: getlago/api:v{{ .Values.version }}
           name: {{ .Release.Name }}-worker
+          {{- if .Values.worker.livenessProbe.enabled | default true }}
           livenessProbe:
             exec:
               command: ["/bin/bash", "-l", "-c", "bundle exec sidekiqmon processes | grep $(hostname) || exit 1"]
+            periodSeconds: {{ .Values.worker.livenessProbe.periodSeconds | default 10 }}
+            failureThreshold: {{ .Values.worker.livenessProbe.failureThreshold | default 5 }}
+            timeoutSeconds: {{ .Values.worker.livenessProbe.timeoutSeconds | default 5 }}
+            initialDelaySeconds: {{ .Values.worker.livenessProbe.initialDelaySeconds | default 60 }}
+          {{- end }}
           {{- with .Values.worker.resources }}
           resources:
             {{- toYaml . | nindent 12}}
