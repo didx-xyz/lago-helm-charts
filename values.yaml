@@ -112,7 +112,7 @@ front:
   resources:
     requests:
       memory: 512Mi
-      cpu: '200m'
+      # cpu: '200m'
   podAnnotations: {}
   podLabels: {}
 
@@ -131,7 +131,7 @@ api:
   resources:
     requests:
       memory: 1Gi
-      cpu: '1000m'
+      # cpu: '1000m'
   volumes:
     storage: '10Gi'
   podAnnotations: {}
@@ -147,7 +147,7 @@ worker:
   resources:
     requests:
       memory: 1Gi
-      cpu: '1000m'
+      # cpu: '1000m'
   podAnnotations: {}
   podLabels: {}
   livenessProbe:
@@ -167,7 +167,7 @@ eventsWorker:
   resources:
     requests:
       memory: 1Gi
-      cpu: '1000m'
+      # cpu: '1000m'
   podAnnotations: {}
   podLabels: {}
   livenessProbe:
@@ -186,7 +186,7 @@ clock:
   resources:
     requests:
       memory: 256Mi
-      cpu: '100m'
+      # cpu: '100m'
   podAnnotations: {}
   podLabels: {}
 
@@ -197,7 +197,7 @@ pdf:
   resources:
     requests:
       memory: 2Gi
-      cpu: '1000m'
+      # cpu: '1000m'
   podAnnotations: {}
   podLabels: {}
 
